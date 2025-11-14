@@ -1,0 +1,12 @@
+﻿SHA256 Checksum for pghttp-1.0.0-win-x64.zip
+=========================================
+
+File: pghttp-1.0.0-win-x64.zip
+Size: 0.03 MB
+Date: 2025-11-14
+SHA256: 023CD69FF3E00D12D3641D64266CFCDD96E8048BE7D851D77414313088E7F0E5
+
+Verify with PowerShell:
+  Get-FileHash pghttp-1.0.0-win-x64.zip -Algorithm SHA256
+
+Expected hash should match the value above.

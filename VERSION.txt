@@ -1,0 +1,47 @@
+pghttp - PostgreSQL HTTP Extension
+Version: 1.0.0
+Build Date: 2025-11-14
+Platform: Cross-Platform (Windows x64 / Linux x64)
+PostgreSQL: 15.x (Compiled for), 12-18+ (Compatible, requires recompilation)
+Compiler: Windows (MSVC 2022), Linux (GCC)
+License: MIT
+
+IMPORTANT - Platform Support:
+- Windows: Fully supported (using WinHTTP API, zero dependencies)
+- Linux: Fully supported (using libcurl)
+- macOS: Compatible (using libcurl, untested)
+See CROSSPLATFORM_README.md for details and installation instructions.
+
+Features:
+- HTTP/HTTPS GET requests
+- HTTP/HTTPS POST requests
+- All HTTP methods support (PUT, DELETE, PATCH, etc.)
+- Detailed response (status code, content-type, body)
+- UTF-8 encoding support
+- Native Windows WinHTTP API (no external dependencies)
+- 30 seconds timeout protection
+- Auto Content-Type header for POST requests
+
+Version Compatibility:
+- Tested: PostgreSQL 15.x
+- Supported: PostgreSQL 12, 13, 14, 15, 16, 17, 18+
+- Note: Different PG versions require recompilation with respective dev packages
+- See POSTGRESQL_COMPATIBILITY.md for detailed compatibility information
+
+Requirements:
+- Windows 10/11 or Windows Server 2016+
+- PostgreSQL 12+ (Windows x64)
+- Administrator privileges for installation
+
+Files in this release:
+- pghttp.dll - Extension library
+- pghttp.control - Extension control file
+- pghttp--1.0.0.sql - SQL function definitions
+- install.ps1 - Automatic installation script
+- INSTALL_RELEASE.md - Installation guide
+- USAGE.md - Usage documentation
+- examples.sql - Example queries
+- README.md - Project overview
+- VERSION.txt - This file
+- POSTGRESQL_COMPATIBILITY.md - Version compatibility guide
+

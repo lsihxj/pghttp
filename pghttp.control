@@ -1,0 +1,8 @@
+# pghttp extension
+comment = 'HTTP client for PostgreSQL with GET and POST support'
+default_version = '1.0.0'
+module_pathname = '$libdir/pghttp'
+relocatable = true
+encoding = 'UTF8'
+# Compatible with PostgreSQL 12 and above (tested with 12-18)
+# Note: Requires recompilation for each major PostgreSQL version

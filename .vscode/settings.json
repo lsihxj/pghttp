@@ -1,0 +1,23 @@
+{
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}",
+        "D:/pgsql/include",
+        "D:/pgsql/include/server",
+        "D:/pgsql/include/server/port/win32",
+        "D:/pgsql/include/server/port/win32_msvc",
+        "C:/curl/include"
+    ],
+    "C_Cpp.default.defines": [
+        "WIN32",
+        "WIN32_STACK_RLIMIT=4194304"
+    ],
+    "C_Cpp.default.compilerPath": "C:/Strawberry/c/bin/gcc.exe",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    "files.associations": {
+        "postgres.h": "c",
+        "fmgr.h": "c",
+        "funcapi.h": "c",
+        "curl.h": "c"
+    }
+}

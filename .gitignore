@@ -1,0 +1,27 @@
+# Object files
+*.o
+*.so
+*.dll
+*.dylib
+
+# Compiled libraries
+*.a
+
+# PostgreSQL files
+*.bc
+
+# Build artifacts
+/results/
+regression.diffs
+regression.out
+
+# IDE files
+.idea/
+*.swp
+*.swo
+*~
+# Keep .vscode for proper IntelliSense configuration
+
+# OS files
+.DS_Store
+Thumbs.db
