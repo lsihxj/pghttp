@@ -1,0 +1,92 @@
+# Windows Makefile for pghttp extension
+# Usage: gmake -f Makefile.win
+
+# PostgreSQL paths
+PG_CONFIG = D:/pgsql/bin/pg_config.exe
+PG_INCLUDEDIR = D:/pgsql/include
+PG_INCLUDEDIR_SERVER = D:/pgsql/include/server
+PG_LIBDIR = D:/pgsql/lib
+PG_PKGLIBDIR = D:/pgsql/lib
+PG_SHAREDIR = D:/pgsql/share
+PG_EXTENSION_DIR = $(PG_SHAREDIR)/extension
+
+# libcurl paths
+CURL_INCLUDEDIR = C:/curl/include
+CURL_LIBDIR = C:/curl/lib
+
+# Extension info
+EXTENSION = pghttp
+MODULE = pghttp
+DATA = pghttp--1.0.0.sql
+CONTROL = pghttp.control
+
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement \
+         -Werror=vla -Wendif-labels -Wmissing-format-attribute -Wformat-security \
+         -fno-strict-aliasing -fwrapv -fexcess-precision=standard -O2
+
+# Include paths
+INCLUDES = -I$(PG_INCLUDEDIR_SERVER) \
+           -I$(PG_INCLUDEDIR_SERVER)/port/win32 \
+           -I$(PG_INCLUDEDIR_SERVER)/port/win32_msvc \
+           -I$(PG_INCLUDEDIR) \
+           -I$(CURL_INCLUDEDIR)
+
+# Library paths and libraries
+LDFLAGS = -shared -L$(PG_LIBDIR) -L$(CURL_LIBDIR)
+LIBS = -lpostgres -lcurl
+
+# Output
+SHLIB = $(MODULE).dll
+
+# Source files
+OBJS = $(MODULE).o
+
+# Default target
+all: $(SHLIB)
+
+# Compile C source to object file
+$(MODULE).o: $(MODULE).c
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+# Link object file to DLL
+$(SHLIB): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+# Install extension
+install: all
+	@echo Installing extension files...
+	@if not exist "$(PG_PKGLIBDIR)" mkdir "$(PG_PKGLIBDIR)"
+	copy /Y $(SHLIB) "$(PG_PKGLIBDIR)\$(SHLIB)"
+	@if not exist "$(PG_EXTENSION_DIR)" mkdir "$(PG_EXTENSION_DIR)"
+	copy /Y $(DATA) "$(PG_EXTENSION_DIR)\$(DATA)"
+	copy /Y $(CONTROL) "$(PG_EXTENSION_DIR)\$(CONTROL)"
+	@echo Installation complete!
+
+# Uninstall extension
+uninstall:
+	@echo Uninstalling extension files...
+	del /F "$(PG_PKGLIBDIR)\$(SHLIB)" 2>nul
+	del /F "$(PG_EXTENSION_DIR)\$(DATA)" 2>nul
+	del /F "$(PG_EXTENSION_DIR)\$(CONTROL)" 2>nul
+	@echo Uninstallation complete!
+
+# Clean build artifacts
+clean:
+	@echo Cleaning build artifacts...
+	del /F $(OBJS) $(SHLIB) 2>nul
+	@echo Clean complete!
+
+# Help
+help:
+	@echo pghttp Extension Makefile for Windows
+	@echo.
+	@echo Targets:
+	@echo   all       - Build the extension (default)
+	@echo   install   - Install the extension
+	@echo   uninstall - Uninstall the extension
+	@echo   clean     - Clean build artifacts
+	@echo   help      - Show this help
+
+.PHONY: all install uninstall clean help

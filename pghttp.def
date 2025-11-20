@@ -1,0 +1,5 @@
+EXPORTS
+    pghttp_get
+    pghttp_post
+    pghttp_request
+    Pg_magic_func
